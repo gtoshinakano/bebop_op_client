@@ -4,42 +4,42 @@ import './App.css';
 import 'semantic-ui-css/semantic.min.css'
 import socketIOClient from "socket.io-client";
 
-import {Label} from "semantic-ui-react"
+import {Label, Icon} from "semantic-ui-react"
 
 const ENDPOINT = "http://127.0.0.1:7575"
 
 function App() {
 
-  const [response, setResponse] = React.useState("Disconnected");
+  const [svConnected, setConnected] = React.useState(false)
 
   React.useEffect(() => {
     const socket = socketIOClient(ENDPOINT);
     socket.on("ping", data => {
-      setResponse(data);
+      setConnected(true)
     });
     socket.on("disconnect", () => {
-      setResponse('Disconnected')
+      setConnected(false)
     })
   }, []);
+  if(!svConnected)
+    return (
+      <div className="App">
+        <header className="App-header">
+          <Icon color="grey" name="sync" size="massive" className="App-logo"/>
+          <Label color="red" size="massive" style={styles.spacer}>
+            <Icon name="unlink" />Socket.io server is disconnected
+          </Label>
+        </header>
+      </div>
+    );
+  else
+    return(
+      "connected"
+    )
+}
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          <Label color="red">{response}</Label>
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const styles = {
+  spacer: {marginTop: 55  }
 }
 
 export default App;
