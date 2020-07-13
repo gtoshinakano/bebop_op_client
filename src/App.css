@@ -36,3 +36,14 @@
     transform: rotate(360deg);
   }
 }
+
+.fullbody{
+  background-color: #4A4D60;
+  color: white;
+  height:100vh;
+  overflow-y: hidden;
+}
+
+.fb-content{
+  padding: 7px
+}
