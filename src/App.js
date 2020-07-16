@@ -1,19 +1,16 @@
 import React from 'react';
 import './App.css';
 import 'semantic-ui-css/semantic.min.css'
-import socketIOClient from "socket.io-client";
+import socket from "./utils/socket-lib";
 import Main from './Components/Main'
 
 import {Label, Icon} from "semantic-ui-react"
-
-const ENDPOINT = "http://127.0.0.1:7575"
 
 function App() {
 
   const [svConnected, setConnected] = React.useState(false)
 
   React.useEffect(() => {
-    const socket = socketIOClient(ENDPOINT);
     socket.on("ping", data => {
       setConnected(true)
     });
