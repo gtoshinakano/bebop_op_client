@@ -1,5 +1,5 @@
 import React from 'react'
-import { Menu, Icon, Label } from 'semantic-ui-react'
+import { Menu, Label } from 'semantic-ui-react'
 import socket from "../utils/socket-lib"
 
 const NavMenu = () => {
