@@ -6,14 +6,10 @@ const NavMenu = () => {
 
   const [droneConnected, setConnected] = React.useState(false)
   const [batteryLevel, setBatteryLevel] = React.useState(0)
-  const [gpsObj, setGpsObj] = React.useState({})
-  const [availability, setAvailability] = React.useState(false)
 
   React.useEffect(() => {
     socket.on("drone_connected", (con) => setConnected(con))
     socket.on("battery_level", data => setBatteryLevel(data))
-    socket.on("gps_position_changed", data => setGpsObj(data))
-    socket.on("drone_can_mission", data => setAvailability(data))
   })
 
   const sendCommand = (data) => {
@@ -27,12 +23,6 @@ const NavMenu = () => {
       </Menu.Item>
       <Menu.Item>
         {droneConnected ? "Connected" : "Disconnected"}
-      </Menu.Item>
-      <Menu.Item>
-        GPS: {JSON.stringify(gpsObj)}
-      </Menu.Item>
-      <Menu.Item>
-        Available to Mission: {JSON.stringify(availability)}
       </Menu.Item>
       <Menu.Item>
         {/*<Button content="emit" primary icon="cog" onClick={emit} />*/}
