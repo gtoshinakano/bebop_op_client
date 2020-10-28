@@ -16,8 +16,8 @@ const NavMenu = () => {
     socket.on("drone_can_mission", data => setAvailability(data))
   })
 
-  const emit = () => {
-    socket.emit("start_mission")
+  const sendCommand = (data) => {
+    socket.emit("cmd", data)
   }
 
   return(
@@ -35,7 +35,9 @@ const NavMenu = () => {
         Available to Mission: {JSON.stringify(availability)}
       </Menu.Item>
       <Menu.Item>
-        <Button content="emit" primary icon="cog" onClick={emit} />
+        {/*<Button content="emit" primary icon="cog" onClick={emit} />*/}
+        <Button content="Take Off" primary icon="cog" onClick={() => sendCommand({type:"take-off"})} />
+        <Button content="Land" primary icon="cog" onClick={() => sendCommand({type:"land"})} />
       </Menu.Item>
       <Menu.Menu position="right">
         <Menu.Item header>
